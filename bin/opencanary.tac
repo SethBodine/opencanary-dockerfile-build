@@ -4,7 +4,7 @@ import sys
 from twisted.application import service
 from pkg_resources import iter_entry_points
 
-from opencanary.config import config, is_docker, detectIPTables
+from opencanary.config import config, is_docker
 from opencanary.logger import getLogger
 from opencanary.modules.http import CanaryHTTP
 from opencanary.modules.https import CanaryHTTPS
@@ -66,6 +66,16 @@ if config.moduleEnabled("snmp"):
         print("Can't import SNMP. Please ensure you have Scapy installed.")
         pass
 
+if config.moduleEnabled("llmnr"):
+    try:
+        # Module needs Scapy, but the rest of OpenCanary doesn't
+        from opencanary.modules.llmnr import CanaryLLMNR
+
+        MODULES.append(CanaryLLMNR)
+    except ImportError:
+        print("Can't import LLMNR. Please ensure you have Scapy installed.")
+        pass
+
 # NB: imports below depend on inotify, only available on linux
 if sys.platform.startswith("linux"):
     from opencanary.modules.samba import CanarySamba
@@ -74,8 +84,6 @@ if sys.platform.startswith("linux"):
     if config.moduleEnabled("portscan") and is_docker():
         # Remove portscan if running in DOCKER (specified in Dockerfile)
         print("Can't use portscan in Docker. Portscan module disabled.")
-    elif config.moduleEnabled("portscan") and not detectIPTables():
-        print("Can't use portscan without iptables. Please install iptables.")
     else:
         from opencanary.modules.portscan import CanaryPortscan
 
