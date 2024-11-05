@@ -1,4 +1,4 @@
-name: Sync Fork
+name: Sync Downstream Fork 
 
 on:
   workflow_dispatch: # on button click
