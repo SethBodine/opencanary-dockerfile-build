@@ -1,0 +1,16 @@
+name: Sync Downstream Fork 
+
+on:
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v1.8
+        with:
+          owner: thinkst
+          base: master
+          head: main
