@@ -1,6 +1,6 @@
 # OpenCanary by Thinkst Canary
 
-<img src="docs/logo.png" width="50" style="float: left"> OpenCanary is a multi-protocol network honeypot. It's primary use-case is to catch hackers after they've breached non-public networks. It has extremely low resource requirements and can be tweaked, modified, and extended.
+<img src="https://raw.githubusercontent.com/thinkst/opencanary/master/docs/logo.png" width="50" style="float: left"> OpenCanary is a multi-protocol network honeypot. It's primary use-case is to catch hackers after they've breached non-public networks. It has extremely low resource requirements and can be tweaked, modified, and extended.
 
 [![OpenCanary Tests](https://github.com/thinkst/opencanary/actions/workflows/opencanary_tests.yml/badge.svg)](https://github.com/thinkst/opencanary/actions/workflows/opencanary_tests.yml)
 [![Docker build](https://github.com/thinkst/opencanary/actions/workflows/docker-build.yml/badge.svg)](https://github.com/thinkst/opencanary/actions/workflows/docker-build.yml)
@@ -10,7 +10,7 @@
 
 OpenCanary runs as a daemon and implements multiple common network protocols. When attackers breach networks and interact with the honeypot, OpenCanary will send you alerts via a variety of mechanisms.
 
-OpenCanary is implemented in Python and so the core honeypot is cross-platform, however certain features require specific OSes. Running on Linux will give you the most options. It has extremely low resource requirements; for example it can be deployed happily on a Raspberry Pi, or a VM with minimal resources.
+OpenCanary is implemented in Python, so the core honeypot is cross-platform; however, certain features require specific OSes. Running on Linux will give you the most options. It has extremely low resource requirements; for example, it can be deployed happily on a Raspberry Pi or a VM with minimal resources.
 
 This README describes how to install and configure OpenCanary on Ubuntu Linux and MacOS.
 
@@ -39,7 +39,7 @@ OpenCanary is the Open Source version of our commercial [Thinkst Canary](https:/
 - **[Project Participation](#project-participation)**
   - [Contributing](#contributing)
   - [Security Vulnerability Reports](#security-vulnerability-reports)
-  - [Bug reports](bug-reports)
+  - [Bug reports](#bug-reports)
   - [Feature Requests](#feature-requests)
   - [Code of Conduct](#code-of-conduct)
 
