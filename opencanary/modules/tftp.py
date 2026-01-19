@@ -1,6 +1,6 @@
 """
-    A log-only Tftp server. It won't respond, but it will log attempts
-    to either read or write files.
+A log-only Tftp server. It won't respond, but it will log attempts
+to either read or write files.
 """
 
 from opencanary.modules import CanaryService
@@ -26,7 +26,7 @@ class Tftp(DatagramProtocol):
             return
 
         try:
-            (filename, mode, ignore) = data[2:].split(b"\x00")
+            (filename, mode, *_) = data[2:].split(b"\x00")
         except ValueError:
             return
 
