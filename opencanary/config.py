@@ -38,6 +38,16 @@ SERVICE_REGEXES = {
     "ssh.version": r"(SSH-(2.0|1.5|1.99|1.0)-([!-,\-./0-~]+(:?$|\s))(?:[ -~]*)){1,253}$",
 }
 
+INTEGER_RANGES = {
+    "redis.max_arg_length": (0, None),
+    "redis.max_bulk_string_length": (1, None),
+    "redis.max_connections": (0, None),
+}
+
+NUMBER_RANGES = {
+    "redis.timeout": (0, None),
+}
+
 
 class Config:
     def __init__(self, configfile=SETTINGS):
@@ -138,6 +148,34 @@ class Config:
             if val < 1 or val > 65535:
                 raise ConfigException(
                     key, "Invalid port number (%s). Must be between 1 and 65535." % val
+                )
+
+        if key in INTEGER_RANGES:
+            if isinstance(val, bool) or not isinstance(val, int):
+                raise ConfigException(key, "%s must be an integer." % key)
+
+            min_value, max_value = INTEGER_RANGES[key]
+            if min_value is not None and val < min_value:
+                raise ConfigException(
+                    key, "%s must be at least %s." % (key, min_value)
+                )
+            if max_value is not None and val > max_value:
+                raise ConfigException(
+                    key, "%s must be at most %s." % (key, max_value)
+                )
+
+        if key in NUMBER_RANGES:
+            if isinstance(val, bool) or not isinstance(val, (int, float)):
+                raise ConfigException(key, "%s must be a number." % key)
+
+            min_value, max_value = NUMBER_RANGES[key]
+            if min_value is not None and val < min_value:
+                raise ConfigException(
+                    key, "%s must be at least %s." % (key, min_value)
+                )
+            if max_value is not None and val > max_value:
+                raise ConfigException(
+                    key, "%s must be at most %s." % (key, max_value)
                 )
 
         if key == "git.max_connections":
