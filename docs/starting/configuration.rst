@@ -252,6 +252,11 @@ you will receive a json formatted config file at `/etc/opencanary/opencanary.con
         "ssh.version": "SSH-2.0-OpenSSH_5.1p1 Debian-4",
         "redis.enabled": false,
         "redis.port": 6379,
+        "redis.max_arg_length": 30,
+        "redis.max_bulk_string_length": 65536,
+        "redis.timeout": 5,
+        "redis.timeout": 10,
+        "redis.max_connections": 128,
         "rdp.enabled": false,
         "rdp.port": 3389,
         "sip.enabled": false,
@@ -317,6 +322,18 @@ These configuration options are also available.
    * - git.timeout
      - 10
      - Seconds a Git connection may remain inactive before it is closed.
+   * - redis.max_arg_length
+     - 30
+     - Maximum Redis command/argument bytes recorded in a single alert field.
+   * - redis.max_bulk_string_length
+     - 65536
+     - Maximum declared RESP bulk string length accepted by the Redis module.
+   * - redis.timeout
+     - 10
+     - Seconds a Redis connection may remain idle before timing out.
+   * - redis.max_connections
+     - 128
+     - Maximum concurrent Redis connections; set to 0 to disable the limit.
    * - telnet.max_connections
      - 64
      - Maximum number of concurrent connections accepted by the Telnet module. The default matches systemd socket units using ``Accept=yes``.
